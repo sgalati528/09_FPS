@@ -1,14 +1,21 @@
 extends KinematicBody
 
-
 onready var Camera = $Pivot/Camera
+var Bullet = preload("res://Scenes/Bullet.tscn")
 
 var gravity = -30
 var max_speed = 8
 var mouse_sensitivity = 0.002
 var mouse_range = 1.2
+var jump = 10 
+var jumping = false 
 
 var velocity = Vector3()
+
+func _ready():
+	pass
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 
 func get_input():
 	var input_dir = Vector3()
@@ -20,6 +27,8 @@ func get_input():
 		input_dir += -Camera.global_transform.basis.x
 	if Input.is_action_pressed("right"):
 		input_dir += Camera.global_transform.basis.x
+	if Input.is_action_pressed("jump"):
+		jumping = true
 	input_dir = input_dir.normalized()
 	return input_dir
 
@@ -28,6 +37,11 @@ func _unhandled_input(event):
 		$Pivot.rotate_x(-event.relative.y * mouse_sensitivity)
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		$Pivot.rotation.x = clamp($Pivot.rotation.x, -mouse_range, mouse_range)
+	if event.is_action_pressed("shoot"):
+		var b = Bullet.instance()
+		b.start($Pivot/Muzzle.global_transform)
+		get_node("/root/Game/Bullets").add_child(b)
+		print("sjot")
 
 func _physics_process(delta):
 	velocity.y += gravity * delta
@@ -35,4 +49,7 @@ func _physics_process(delta):
 	
 	velocity.x = desired_velocity.x
 	velocity.z = desired_velocity.z
+	if jumping and is_on_floor():
+		velocity.y = jump
+	jumping = false 
 	velocity = move_and_slide(velocity, Vector3.UP, true)
