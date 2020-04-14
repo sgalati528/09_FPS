@@ -41,7 +41,6 @@ func _unhandled_input(event):
 		var b = Bullet.instance()
 		b.start($Pivot/Muzzle.global_transform)
 		get_node("/root/Game/Bullets").add_child(b)
-		print("sjot")
 
 func _physics_process(delta):
 	velocity.y += gravity * delta

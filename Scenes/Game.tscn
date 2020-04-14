@@ -1,10 +1,25 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/machineGun.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/pine.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/stoneWallCurve.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/stoneWallColumn.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/stoneWallDamaged.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/foliage.material" type="Material" id=8]
+[ext_resource path="res://Scenes/gravestoneCrossLarge.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/crypt.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/gravestoneRound.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/gravestoneRoof.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/gravestoneBroken.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/gravestoneFlat.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/gravestoneWide.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/spooplyghost.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=17]
 
 [sub_resource type="PlaneMesh" id=1]
+material = ExtResource( 8 )
 
 [sub_resource type="ConvexPolygonShape" id=2]
 points = PoolVector3Array( -1.00542, 0.00546448, -1.00546, -1.00542, 0.00546448, 1.00546, 1.00546, 0.00546448, -1.00546, 1.00546, 0.00546448, 1.00546 )
@@ -15,18 +30,23 @@ radius = 0.5
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.4, 0.1, 0.4 )
 
+[sub_resource type="CapsuleShape" id=5]
+
 [node name="Game" type="Spatial"]
 script = ExtResource( 3 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425186, 3.32726, -0.108167 )
 
 [node name="Ground" type="StaticBody" parent="."]
 
 [node name="YEET" type="MeshInstance" parent="Ground"]
-transform = Transform( 3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0 )
+transform = Transform( 8, 0, 0, 0, 1, 0, 0, 0, 9, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Ground"]
-transform = Transform( 3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0 )
+transform = Transform( 8, 0, 0, 0, 1, 0, 0, 0, 9, 0, 0, 0 )
 shape = SubResource( 2 )
 
 [node name="Player" type="KinematicBody" parent="."]
@@ -50,24 +70,162 @@ current = true
 [node name="machineGun" parent="Player/Pivot" instance=ExtResource( 2 )]
 
 [node name="Muzzle" type="Position3D" parent="Player/Pivot"]
-transform = Transform( 1, 0, 0, 0, -1, 3.25841e-07, 0, -3.25841e-07, -1, 0.2, -0.2, -0.3 )
+transform = Transform( 1, 0, 0, 0, -1, 3.25841e-07, 0, -3.25841e-07, -1, 0.191621, -0.126829, -1.1856 )
 
 [node name="Bullets" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.315377 )
 
 [node name="HUD" type="Node2D" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="HUD"]
-margin_right = 340.0
-margin_bottom = 62.0
+margin_right = 141.0
+margin_bottom = 24.0
 color = Color( 0, 0.976471, 1, 0.231373 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Score" type="Label" parent="HUD"]
-margin_right = 327.0
-margin_bottom = 74.0
-text = "Score: "
+margin_left = 1.0
+margin_top = 6.0
+margin_right = 328.0
+margin_bottom = 80.0
+text = "Ghosts Busted: "
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="StoneCorners" type="Spatial" parent="."]
+
+[node name="stoneWallCurve" parent="StoneCorners" instance=ExtResource( 5 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.5, 0, 7 )
+
+[node name="stoneWallCurve2" parent="StoneCorners" instance=ExtResource( 5 )]
+transform = Transform( 2.38498e-08, 0, -2, 0, 2, 0, 2, 0, 2.38498e-08, -6.5, 0, 7 )
+
+[node name="stoneWallCurve3" parent="StoneCorners" instance=ExtResource( 5 )]
+transform = Transform( -2, 0, -6.51683e-07, 0, 2, 0, 6.51683e-07, 0, -2, -6.5, 0, -7 )
+
+[node name="stoneWallCurve4" parent="StoneCorners" instance=ExtResource( 5 )]
+transform = Transform( -3.25841e-07, 0, 2, 0, 2, 0, -2, 0, -3.25841e-07, 6.5, 0, -7 )
+
+[node name="StoneWalls" type="Spatial" parent="."]
+
+[node name="stoneWallColumn" parent="StoneWalls" instance=ExtResource( 6 )]
+transform = Transform( 4, 0, 0, 0, 2, 0, 0, 0, 2, -3.19714, 0, 6.95315 )
+
+[node name="stoneWallColumn2" parent="StoneWalls" instance=ExtResource( 6 )]
+transform = Transform( 4, 0, 0, 0, 2, 0, 0, 0, 2, 3.55715, 0, 6.95315 )
+
+[node name="stoneWallColumn3" parent="StoneWalls" instance=ExtResource( 6 )]
+transform = Transform( -6.51683e-07, 0, 2, 0, 2, 0, -4, 0, -3.25841e-07, 6.4455, 0, 3.75638 )
+
+[node name="stoneWallColumn4" parent="StoneWalls" instance=ExtResource( 6 )]
+transform = Transform( -6.51683e-07, 0, 2, 0, 2, 0, -4, 0, -3.25841e-07, 6.4455, 0, -0.259822 )
+
+[node name="stoneWallColumn5" parent="StoneWalls" instance=ExtResource( 6 )]
+transform = Transform( -6.51683e-07, 0, 2, 0, 2, 0, -4, 0, -3.25841e-07, 6.4455, 0, -4.1753 )
+
+[node name="stoneWallColumn6" parent="StoneWalls" instance=ExtResource( 6 )]
+transform = Transform( -4, 0, -6.51683e-07, 0, 2, 0, 1.30337e-06, 0, -2, 3.27842, 0, -6.97539 )
+
+[node name="stoneWallColumn7" parent="StoneWalls" instance=ExtResource( 6 )]
+transform = Transform( -4, 0, -6.51683e-07, 0, 2, 0, 1.30337e-06, 0, -2, -0.753991, 0, -6.97539 )
+
+[node name="stoneWallColumn9" parent="StoneWalls" instance=ExtResource( 6 )]
+transform = Transform( 4.76995e-08, 0, -2, 0, 2, 0, 4, 0, 2.38498e-08, -6.44256, 0, -3.62078 )
+
+[node name="stoneWallColumn10" parent="StoneWalls" instance=ExtResource( 6 )]
+transform = Transform( 4.76995e-08, 0, -2, 0, 2, 0, 4, 0, 2.38498e-08, -6.44256, 0, 0.303824 )
+
+[node name="stoneWallColumn11" parent="StoneWalls" instance=ExtResource( 6 )]
+transform = Transform( 4.76995e-08, 0, -2, 0, 2, 0, 4, 0, 2.38498e-08, -6.44256, 0, 4.16799 )
+
+[node name="stoneWallColumn8" parent="StoneWalls" instance=ExtResource( 6 )]
+transform = Transform( -3, 0, -7.78829e-07, 0, 2, 0, 1.16824e-06, 0, -2, -4.20253, 0, -6.97539 )
+
+[node name="StoneEntrance" type="Spatial" parent="."]
+
+[node name="stoneWallDamaged" parent="StoneEntrance" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 2, -0.871686, 0, 6.94131 )
+
+[node name="stoneWallDamaged2" parent="StoneEntrance" instance=ExtResource( 7 )]
+transform = Transform( -1, 0, -6.51683e-07, 0, 2, 0, 3.25841e-07, 0, -2, 0.876396, 0, 8.66014 )
+
+[node name="Trees" type="Spatial" parent="."]
+
+[node name="pine" parent="Trees" instance=ExtResource( 4 )]
+transform = Transform( 4, 0, 0, 0, 3, 0, 0, 0, 4, -4.95316, 0, -5.86026 )
+
+[node name="pine2" parent="Trees" instance=ExtResource( 4 )]
+transform = Transform( 4, 0, 0, 0, 3, 0, 0, 0, 4, 3.91755, 0, 0.557603 )
+
+[node name="pine3" parent="Trees" instance=ExtResource( 4 )]
+transform = Transform( 4, 0, 0, 0, 3, 0, 0, 0, 4, -2.16022, 0, 4.61113 )
+
+[node name="Graves" type="Spatial" parent="."]
+
+[node name="gravestoneCrossLarge" parent="Graves" instance=ExtResource( 9 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 4.06184, 0, 5.33397 )
+
+[node name="gravestoneWide" parent="Graves" instance=ExtResource( 15 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.24462, 0, 2.25824 )
+
+[node name="gravestoneRoof" parent="Graves" instance=ExtResource( 12 )]
+transform = Transform( 2, 0, 0, 0, 3, 0, 0, 0, 2, 5.38616, 0, 2.18296 )
+
+[node name="gravestoneRound" parent="Graves" instance=ExtResource( 11 )]
+transform = Transform( -2.44381e-07, 0, 2, 0, 2, 0, -1.5, 0, -3.25841e-07, -6.96165, 0, -0.0998249 )
+
+[node name="gravestoneFlat" parent="Graves" instance=ExtResource( 14 )]
+transform = Transform( -3.25841e-07, 0, 2, 0, 2, 0, -2, 0, -3.25841e-07, -5.69411, 0, -0.106294 )
+
+[node name="gravestoneBroken" parent="Graves" instance=ExtResource( 13 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 2.63153, 0, -7.20466 )
+
+[node name="crypt" parent="Graves" instance=ExtResource( 10 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 2.5, 4.64886, 0, -6.13556 )
+
+[node name="Enemies" type="Spatial" parent="."]
+
+[node name="Enemy" type="KinematicBody" parent="Enemies"]
+transform = Transform( -0.222747, 0, -0.447642, 0, 0.5, 0, 0.447642, 0, -0.222747, 1.72777, 0, -3.28555 )
+input_capture_on_drag = true
+script = ExtResource( 17 )
+
+[node name="spoopyghost" parent="Enemies/Enemy" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.500379, 0, -0.248989 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Enemies/Enemy"]
+transform = Transform( -4.07302e-08, 0.25, -1.09278e-08, 0, -1.09278e-08, -0.25, -0.25, -4.07302e-08, 1.78037e-15, -0.323158, 0.682405, 0.337543 )
+shape = SubResource( 5 )
+
+[node name="Scanner" type="RayCast" parent="Enemies/Enemy"]
+transform = Transform( -0.038056, 0, -0.999276, 0, 1, 0, 0.999276, 0, -0.038056, 0.762292, 0.701477, 0.252843 )
+enabled = true
+cast_to = Vector3( 30, 0, 0 )
+
+[node name="Timer" type="Timer" parent="Enemies/Enemy"]
+one_shot = true
+
+[node name="Enemy2" type="KinematicBody" parent="Enemies"]
+transform = Transform( -0.438766, 0, 0.23976, 0, 0.5, 0, -0.23976, 0, -0.438766, 3.45646, 0, 6.42078 )
+input_capture_on_drag = true
+script = ExtResource( 17 )
+
+[node name="spoopyghost" parent="Enemies/Enemy2" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.500379, 0, -0.248989 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Enemies/Enemy2"]
+transform = Transform( -4.07302e-08, 0.25, -1.09278e-08, 0, -1.09278e-08, -0.25, -0.25, -4.07302e-08, 1.78037e-15, -0.323158, 0.682405, 0.337543 )
+shape = SubResource( 5 )
+
+[node name="Scanner" type="RayCast" parent="Enemies/Enemy2"]
+transform = Transform( -0.038056, 0, -0.999276, 0, 1, 0, 0.999276, 0, -0.038056, 0.762292, 0.701477, 0.252843 )
+enabled = true
+cast_to = Vector3( 30, 0, 0 )
+
+[node name="Timer" type="Timer" parent="Enemies/Enemy2"]
+one_shot = true
+[connection signal="timeout" from="Enemies/Enemy/Timer" to="Enemies/Enemy" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Enemies/Enemy2/Timer" to="Enemies/Enemy2" method="_on_Timer_timeout"]

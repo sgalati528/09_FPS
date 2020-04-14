@@ -8,4 +8,4 @@ func _ready():
 
 func update_score(s):
 	score+= s
-	Score.text = "Score: " + str(score)
+	Score.text = "Ghosts Busted: " + str(score)
