@@ -189,7 +189,7 @@ transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 2.5, 4.64886, 0, -6.13556 )
 [node name="Enemies" type="Spatial" parent="."]
 
 [node name="Enemy" type="KinematicBody" parent="Enemies"]
-transform = Transform( -0.222747, 0, -0.447642, 0, 0.5, 0, 0.447642, 0, -0.222747, 1.72777, 0, -3.28555 )
+transform = Transform( 0.456189, 0, 0.204675, 0, 0.5, 0, -0.204675, 0, 0.456189, 1.72777, 0, -3.28555 )
 input_capture_on_drag = true
 script = ExtResource( 17 )
 
